@@ -53,7 +53,7 @@ else
     % then perform automatic segmentation and
     % save the results to a file
     
-    [circleiris circlepupil imagewithnoise] = thresh(eyeimage, 30, 80);
+    [circleiris, circlepupil, imagewithnoise] = thresh(eyeimage, 30, 80);
     save(savefile,'circleiris','circlepupil','imagewithnoise');
     
 end
@@ -87,7 +87,7 @@ cd(w);
 
 % perform normalisation
 
-[polar_array noise_array] = normaliseiris(imagewithnoise, circleiris(2),...
+[polar_array,noise_array] = normaliseiris(imagewithnoise, circleiris(2),...
     circleiris(1), circleiris(3), circlepupil(2), circlepupil(1), circlepupil(3),eyeimage_filename, radial_res, angular_res);
 
 
@@ -99,4 +99,4 @@ imwrite(noise_array,[eyeimage_filename,'-polarnoise.jpg'],'jpg');
 cd(w);
 
 % perform feature encoding
-[template mask] = encode(polar_array, noise_array, nscales, minWaveLength, mult, sigmaOnf); 
+[template, mask] = encode(polar_array, noise_array, nscales, minWaveLength, mult, sigmaOnf); 
